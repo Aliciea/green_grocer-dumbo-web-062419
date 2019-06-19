@@ -34,7 +34,8 @@ end
 
 def apply_clearance(cart)
   # code here
-  
+  	cart.reject{|hash,info| info[:clearance]==false}.collect{|hash,info| info[:price]=((info[:price]*1.8)-info[:price]).round(1)}
+  return cart
 end
 
 def checkout(cart, coupons)
