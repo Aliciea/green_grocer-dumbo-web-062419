@@ -15,7 +15,21 @@ end
 
 def apply_coupons(cart, coupons)
   # code here
-  
+  couponHash = {}
+	 amtHash = {}
+	 cCart =  cart
+	 if coupons == []
+		 return cCart
+	 end
+	 cCart.each do |food, info|
+		 coupons.each do |items|
+			 if items[:item] == food
+					 couponHash["#{food} W/COUPON"] = {:price => items[:cost], :clearance => info[:clearance], :count => getCouponCount(food,coupons)}
+           couponHash["#{food}"] = {:price => info[:price], :clearance => info[:clearance], :count => info[:count] - (items[:num]*getCouponCount(food,coupons))}
+			 end
+		 end
+	 end
+	 return cCart.merge!(couponHash)
 end
 
 def apply_clearance(cart)
