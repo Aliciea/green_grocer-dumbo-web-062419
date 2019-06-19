@@ -52,6 +52,5 @@ def checkout(cart, coupons)
 	if total > 100
 	  total =  ((total*1.9)-total).round(1)
 	end
-	
 	return total
 end
